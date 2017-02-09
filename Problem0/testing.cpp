@@ -1,3 +1,9 @@
+/*
+*		Created by Sishaar Rao
+*		2/8/16
+*		This is the Brute Force solution for the minimum distance problem
+*/
+
 #include <iostream>
 #include <cmath>
 
