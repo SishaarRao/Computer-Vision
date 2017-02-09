@@ -14,6 +14,11 @@ float distance(float x1, float y1, float x2, float y2) {
    return sqrt(pow((x2 - x1),2) + pow((y2 - y1),2));
 }
 
+float minimum(float x1, float x2){
+  if(x1 >= x2) return x2;
+  else return x1;
+}
+
 int main() {
    int input;
    cout << "Input: ";
@@ -103,10 +108,30 @@ int main() {
 	 }
       }
    }
+
+   float myMin = minimum(dLmin, dRmin);
    
    //Find the minimal distance dLRmin among the set of pairs of points in which one point lies on the left of the dividing vertical and the other point lies to the right.
    
-   
+	   // Find upper and lower bound
+   int lower; int upper;
+   for(int i= dataL.size() - 1; i > 0; i--)
+   {
+     if(dataL[dataL.size()-1] - dataL[i] > myMin/2){
+       lower = i;
+       break;
+     }
+   }
+
+   for(int i= 0; i < dataR.size(); i++)
+   {
+     if(dataR[dataR.size()-1] - dataR[i] > myMin/2){
+       upper = i;
+       break;
+     }
+   }
+
+	   // Loop through and find min
    
    //minimum among dLmin, dRmin, and dLRmin
 
