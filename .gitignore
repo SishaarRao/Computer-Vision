@@ -1,3 +1,7 @@
 # Ignore the gitbash file
 
 /gitbash.sh*
+
+# Ignore the a.out compiled file
+
+/Problem0/a.out*
