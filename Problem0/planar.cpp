@@ -48,7 +48,7 @@ int main() {
    const clock_t START0 = clock();
    std::sort(begin(data), end(data));
    const double T_ELAPSED0 = (double)(clock() - START0) / CLOCKS_PER_SEC;
-   cout << "Time to Sort the Array: " << T_ELAPSED0;
+   cout << "Time to Sort the Array: " << T_ELAPSED0 << endl << endl << endl;
 
    // Print a Sorted Array
    /*
@@ -64,6 +64,12 @@ int main() {
    
    const clock_t START = clock();
    //Split the set of points into two equal-sized subsets by a vertical line x=xmid
+   std::vector<float> dataL, dataR;
+   for(int i = 0; i < data.size(); i++)
+   {
+      if(i < data.size()/2) dataL.push_back(data[i]);
+      else dataR.push_back(data[i]);
+   }
 
    //Solve the problem recursively in the left and right subsets. This yields the left-side and right-side minimum distances dLmin and dRmin, respectively
    
