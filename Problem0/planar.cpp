@@ -34,7 +34,7 @@ int main() {
    cout << "Generated" << endl;
 
    // Print an Unsorted Array
-   
+   /*
    for (int i = 0; i < data.size(); i++)
    {
       for (int j = 0; j < data[i].size(); j++)
@@ -43,9 +43,15 @@ int main() {
       }
       cout << endl;
    }
+   */
    // Sort the Vector
+   const clock_t START0 = clock();
    std::sort(begin(data), end(data));
+   const double T_ELAPSED0 = (double)(clock() - START0) / CLOCKS_PER_SEC;
+   cout << "Time to Sort the Array: " << T_ELAPSED0;
 
+   // Print a Sorted Array
+   /*
    for (int i = 0; i < data.size(); i++)
    {
       for (int j = 0; j < data[i].size(); j++)
@@ -54,10 +60,16 @@ int main() {
       }
       cout << endl;
    }
+   */
    
    const clock_t START = clock();
+   //Split the set of points into two equal-sized subsets by a vertical line x=xmid
 
+   //Solve the problem recursively in the left and right subsets. This yields the left-side and right-side minimum distances dLmin and dRmin, respectively
    
+   //Find the minimal distance dLRmin among the set of pairs of points in which one point lies on the left of the dividing vertical and the other point lies to the right.
+
+   //minimum among dLmin, dRmin, and dLRmin
 
    const double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
 
