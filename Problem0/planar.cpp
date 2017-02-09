@@ -72,9 +72,42 @@ int main() {
    }
 
    //Solve the problem recursively in the left and right subsets. This yields the left-side and right-side minimum distances dLmin and dRmin, respectively
+
+
+	   // Index1 and Index2 will be the two closest entries in DataL
+   int index1; int index2;
+   float dLmin = sqrt(2);
+   for(int i=0; i<dataL.size(); i++)
+   {
+      for(int j=i+1; j<dataL[i].size(); j++)
+      {
+	 if (distance(dataL[i][0], dataL[i][1], dataL[j][0], dataL[j][1]) < min)
+	 {
+	    dLmin = distance(dataL[i][0], dataL[i][1], dataL[j][0], dataL[j][1]);
+	    index1 = i; index2 = j;
+	 }
+      }
+   }
+
+   	// Index3 and Index4 will be the two closest entries in DataR
+   int index3; int index4;
+   float dRmin = sqrt(2);
+   for(int i=0; i<dataR.size(); i++)
+   {
+      for(int j=i+1; j<dataR[i].size(); j++)
+      {
+	 if (distance(dataR[i][0], dataR[i][1], dataR[j][0], dataR[j][1]) < min)
+	 {
+	    dRmin = distance(dataR[i][0], dataR[i][1], dataR[j][0], dataR[j][1]);
+	    index3 = i; index4 = j;
+	 }
+      }
+   }
    
    //Find the minimal distance dLRmin among the set of pairs of points in which one point lies on the left of the dividing vertical and the other point lies to the right.
-
+   
+   
+   
    //minimum among dLmin, dRmin, and dLRmin
 
    const double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
