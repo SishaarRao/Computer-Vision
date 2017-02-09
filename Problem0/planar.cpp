@@ -33,8 +33,8 @@ int main() {
    }
    cout << "Generated" << endl;
 
-   // Print Array
-   /*
+   // Print an Unsorted Array
+   
    for (int i = 0; i < data.size(); i++)
    {
       for (int j = 0; j < data[i].size(); j++)
@@ -43,7 +43,18 @@ int main() {
       }
       cout << endl;
    }
-   */
+   // Sort the Vector
+   std::sort(begin(data), end(data));
+
+   for (int i = 0; i < data.size(); i++)
+   {
+      for (int j = 0; j < data[i].size(); j++)
+      {
+	cout << data[i][j] << "  ";
+      }
+      cout << endl;
+   }
+   
    const clock_t START = clock();
 
    
