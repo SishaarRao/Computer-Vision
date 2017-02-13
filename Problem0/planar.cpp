@@ -70,8 +70,7 @@ int main() {
    const clock_t START = clock();
    //Split the set of points into two equal-sized subsets by a vertical line x=xmid
    std::vector<float> dataL, dataR;
-   for(int i = 0; i < data.size(); i++)
-   {
+   for(int i = 0; i < data.size(); i++){
       if(i < data.size()/2) dataL.push_back(data[i]);
       else dataR.push_back(data[i]);
    }
@@ -82,12 +81,9 @@ int main() {
 	   // Index1 and Index2 will be the two closest entries in DataL
    int index1; int index2;
    float dLmin = sqrt(2);
-   for(int i=0; i<dataL.size(); i++)
-   {
-      for(int j=i+1; j<dataL[i].size(); j++)
-      {
-	 if (distance(dataL[i][0], dataL[i][1], dataL[j][0], dataL[j][1]) < min)
-	 {
+   for(int i=0; i<dataL.size(); i++){
+      for(int j=i+1; j<dataL[i].size(); j++){
+      	 if (distance(dataL[i][0], dataL[i][1], dataL[j][0], dataL[j][1]) < min){
 	    dLmin = distance(dataL[i][0], dataL[i][1], dataL[j][0], dataL[j][1]);
 	    index1 = i; index2 = j;
 	 }
@@ -97,12 +93,9 @@ int main() {
    	// Index3 and Index4 will be the two closest entries in DataR
    int index3; int index4;
    float dRmin = sqrt(2);
-   for(int i=0; i<dataR.size(); i++)
-   {
-      for(int j=i+1; j<dataR[i].size(); j++)
-      {
-	 if (distance(dataR[i][0], dataR[i][1], dataR[j][0], dataR[j][1]) < min)
-	 {
+   for(int i=0; i<dataR.size(); i++){
+      for(int j=i+1; j<dataR[i].size(); j++){
+	 if (distance(dataR[i][0], dataR[i][1], dataR[j][0], dataR[j][1]) < min){
 	    dRmin = distance(dataR[i][0], dataR[i][1], dataR[j][0], dataR[j][1]);
 	    index3 = i; index4 = j;
 	 }
@@ -115,16 +108,14 @@ int main() {
    
 	   // Find upper and lower bound
    int lower; int upper;
-   for(int i= dataL.size() - 1; i > 0; i--)
-   {
+   for(int i= dataL.size() - 1; i > 0; i--){
      if(dataL[dataL.size()-1] - dataL[i] > myMin/2){
        lower = i;
        break;
      }
    }
 
-   for(int i= 0; i < dataR.size(); i++)
-   {
+   for(int i= 0; i < dataR.size(); i++){
      if(dataR[dataR.size()-1] - dataR[i] > myMin/2){
        upper = i;
        break;
@@ -132,9 +123,14 @@ int main() {
    }
 
 	   // Loop through and find min
-   
+   float dLRmin = sqrt(2);
+   for(int i = 0; i < dataL.size(); i++){
+      for(int j = 0; j < dataR.size(); j++){
+	 
+      }
+   }
    //minimum among dLmin, dRmin, and dLRmin
-
+   
    const double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
 
    //   cout << "Point 1: " << data[index1][0] << "  " << data[index1][1] << endl << "Point 2: " << data[index2][0] << "  " << data[index2][1] << endl;
