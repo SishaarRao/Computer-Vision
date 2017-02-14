@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 float distance(float x1, float y1, float x2, float y2) {
@@ -66,7 +67,7 @@ std::vector< std::vector<float> > solve(int in) {
 }
 
 int generateImage(std::vector< std::vector<float> > data){
-
+   
 }
 
 int main(){
