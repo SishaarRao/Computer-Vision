@@ -68,9 +68,17 @@ int solve(int in) {
 
 int main(){
   int i = 3;
-  while(i < 15000){
+  while(i < 3000){
     solve(i);
     i = i*2;
   }
+
+  while(i < 15000){
+     solve(i);
+     i = i+1000;
+  }
+
+  solve(15000);
+
 }
 
