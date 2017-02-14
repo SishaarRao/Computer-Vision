@@ -6,7 +6,7 @@
 
 #include <iostream>
 #include <cmath>
-
+#include <vector>
 using namespace std;
 
 float distance(float x1, float y1, float x2, float y2) {
@@ -14,17 +14,17 @@ float distance(float x1, float y1, float x2, float y2) {
 }
 
 
-int solve(int in) {
+std::vector< std::vector<float> > solve(int in) {
    int input = in;
-   // 2D Array
-   float data[input][2];
+   std::vector< std::vector<float> > data;
 
    // Fill Array
    for (int i = 0; i < input; i++) {
-      data[i][0] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-      data[i][1] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+     std::vector<float> temp;
+     temp.push_back( static_cast <float> (rand()) / static_cast <float> (RAND_MAX) );
+     temp.push_back( static_cast <float> (rand()) / static_cast <float> (RAND_MAX) );
+     data.push_back(temp);
    }
-
 
    // Print the 2D Array
 	/*
@@ -62,11 +62,25 @@ int solve(int in) {
 
 
    cout << endl;
-   return 0;
+   return data;
 }
 
+int generateImage(std::vector< std::vector<float> > data){
+
+}
 
 int main(){
+   int input = 1000;
+   std::vector< std::vector<float> > data = solve(input);
+   /* Print Data Vectory
+   for(int i=0; i<input; i++){
+      for(int j=0; j<2; j++){
+	cout << data[i][j]  << "  ";
+      }
+      cout << endl;
+   }
+   cout << endl << endl;
+   */
    
 }
 
