@@ -67,21 +67,53 @@ std::vector< std::vector<float> > solve(int in) {
 }
 
 int generateImage(std::vector< std::vector<float> > data){
-   
-}
+   ofstream output;
+   const int dimensions = 200;
+   // Create File and Add Header
+   output.open("output.ppm");
 
-int main(){
-   int input = 1000;
-   std::vector< std::vector<float> > data = solve(input);
-   /* Print Data Vectory
-   for(int i=0; i<input; i++){
-      for(int j=0; j<2; j++){
-	cout << data[i][j]  << "  ";
+   output << "P3 " << dimensions << " " << dimensions << " 1" << "\n";
+
+   int outputMatrix[dimensions][dimensions] = {{0}};
+   // Begin Looping through and adding pixels
+   for(int i=0; i<data.size(); i++){
+      outputMatrix[(int)(dimensions*data[i][0])][(int)(dimensions*data[i][1])] = 1;
+   }
+   // Display outputMatrix
+   /*
+   for(int i=0; i<dimensions; i++){
+      for(int j=0; j<dimensions; j++){
+	 cout << outputMatrix[i][j]  << "  ";
       }
       cout << endl;
    }
    cout << endl << endl;
    */
-   
+
+   for(int i=0; i<dimensions; i++){
+      for(int j=0; j<dimensions; j++){
+	 if(outputMatrix[i][j] == 1) output << "0 0 0 ";
+	 else output << "1 1 1 ";
+      }
+      output << "\n";
+   }
+
+   output.close();
+   return 0;
 }
+
+int main(){
+      const int input = 1000;
+      std::vector< std::vector<float> > data = solve(input);
+      /* Print Data Vectory
+	 for(int i=0; i<input; i++){
+	 for(int j=0; j<2; j++){
+	 cout << data[i][j]  << "  ";
+	 }
+	 cout << endl;
+	 }
+	 cout << endl << endl;
+      */
+      generateImage(data);
+   }
 
