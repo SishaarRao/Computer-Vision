@@ -43,8 +43,6 @@ std::vector< std::vector<float> > solve(int in) {
    float min = sqrt(2);
    int index1;
    int index2;
-   const clock_t START = clock();
-
    for(int i=0; i<input; i++)
    {
       for(int j=i+1; j<input; j++)
@@ -56,10 +54,9 @@ std::vector< std::vector<float> > solve(int in) {
 	 }
       }
    }
-   const double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
 
    //   cout << "Point 1: " << data[index1][0] << "  " << data[index1][1] << endl << "Point 2: " << data[index2][0] << "  " << data[index2][1] << endl;
-   cout << input << "  " << T_ELAPSED;
+   cout << input;
 
 
    cout << endl;
@@ -104,7 +101,10 @@ int generateImage(std::vector< std::vector<float> > data){
 
 int main(){
       const int input = 1000;
+      clock_t START = clock();
       std::vector< std::vector<float> > data = solve(input);
+      double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
+      cout << T_ELAPSED << endl;
       /* Print Data Vectory
 	 for(int i=0; i<input; i++){
 	 for(int j=0; j<2; j++){
@@ -114,6 +114,9 @@ int main(){
 	 }
 	 cout << endl << endl;
       */
+      clock_t START = clock();
       generateImage(data);
-   }
+      double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
+      cout << T_ELAPSED << endl;
+}
 
