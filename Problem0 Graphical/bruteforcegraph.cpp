@@ -114,9 +114,9 @@ int main(){
 	 }
 	 cout << endl << endl;
       */
-      clock_t START = clock();
+      START = clock();
       generateImage(data);
-      double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
+      T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
       cout << T_ELAPSED << endl;
 }
 
