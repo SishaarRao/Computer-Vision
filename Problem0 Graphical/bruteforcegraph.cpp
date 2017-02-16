@@ -21,6 +21,7 @@ std::vector< std::vector<float> > solve(int in) {
    std::vector< std::vector<float> > data;
 
    // Fill Array
+   srand(std::time(0));
    for (int i = 0; i < input; i++) {
      std::vector<float> temp;
      temp.push_back( static_cast <float> (rand()) / static_cast <float> (RAND_MAX) );
@@ -55,9 +56,9 @@ std::vector< std::vector<float> > solve(int in) {
    }
 
    //   cout << "Point 1: " << data[index1][0] << "  " << data[index1][1] << endl << "Point 2: " << data[index2][0] << "  " << data[index2][1] << endl;
-   cout << input << endl;
+   cout << "Num of Input: " << input << endl;
 
-   cout << min << endl;
+   cout << "Min distance: " << min << endl;
    return data;
 }
 
@@ -75,39 +76,84 @@ int generateImage(std::vector< std::vector<float> > data){
       outputMatrix[(int)(dimensions*data[i][0])][(int)(dimensions*data[i][1])] = 1;
    }
    // Mark the minimum pixels
-   outputMatrix[(int)(dimensions*data[index1][0])][(int)(dimensions*data[index1][1])] = 2;
-   outputMatrix[(int)(dimensions*data[index2][0])][(int)(dimensions*data[index2][1])] = 2;
+   outputMatrix[(int)(dimensions*data[index1][0])][(int)(dimensions*data[index1][1])] = 3;
+   outputMatrix[(int)(dimensions*data[index2][0])][(int)(dimensions*data[index2][1])] = 3;
 
    // Bresenham Algorithm
 
-   float x1 = (float)(dimensions)*(float)(data[index1][0]);
-   float y1 = (float)(dimensions)*(float)(data[index1][1]);
-   float x2 = (float)(dimensions)*(float)(data[index2][0]);
-   float y2 = (float)(dimensions)*(float)(data[index2][1]);
-
+   float x1temp = (float)(dimensions)*(float)(data[index1][0]);
+   float y1temp = (float)(dimensions)*(float)(data[index1][1]);
+   float x2temp = (float)(dimensions)*(float)(data[index2][0]);
+   float y2temp = (float)(dimensions)*(float)(data[index2][1]);
+   float x1; float x2; float y1; float y2;
+   if(x1temp < x2temp){
+      x1 = x1temp;
+      x2 = x2temp;
+      y1 = y1temp;
+      y2 = y2temp;
+   }
+   else{
+      x1 = x2temp;
+      x2 = x1temp;
+      y1 = y2temp;
+      y2 = y1temp;
+   }
+   cout << x1 << " " << y1 << endl;
+   cout << x2 << " " << y2 << endl;
    float dx = x2 - x1;
    float dy = y2 - y1;
 
-   float m = dy/dx;
-   int j = (int)(y1);
-   float e = m - 1;
+   float m = (dy)/(dx);
 
-   for(int i = (int)(x1); i < (int)(x2); i++){
-      // Illuminate point
-      outputMatrix[i][j] = 2;
-      if(e >= 0){
-	 j += 1;
-	 e -= 1.0;
+   // Case if the slope is positive
+   if(m > 0){
+      cout << "m: " << m << endl;
+      int j = (int)(y1);
+      cout << "j: " << j << endl;
+      float e = m - 1.0;
+      cout << "e: " << e << endl;
+      for(int i = (int)(x1); i <= (int)(x2); i++){
+	 // Illuminate point
+	 outputMatrix[i][j] = 2;
+	 if(e >= 0){
+	    while(e>0){
+	       e -= 1.0;
+	       j += 1;
+	       outputMatrix[i][j] = 2;
+	    }
+	 }
+	 e += m;
       }
-      e += m;
    }
-   
-   
+   // Case if the slope is negative
+   else{
+      cout << "m: " << m << endl;
+      int j = (int)(y1);
+      cout << "j: " << j << endl;
+      float e = m + 1.0;
+      cout << "e: " << e << endl;
+      for(int i = (int)(x1); i <= (int)(x2); i++){
+	 // Illuminate point
+	 outputMatrix[i][j] = 2;
+	 if(e >= 0){
+	    while(e<0 or (i==(int)(x2) and j >= (int)(y2))){
+	       e += 1.0;
+	       j -= 1;
+	       outputMatrix[i][j] = 2;
+	    }
+	 }
+	 e -= m;
+      }
+   }
+
+
+
    // Write to the image
    for(int i=0; i<dimensions; i++){
       for(int j=0; j<dimensions; j++){
 	 if(outputMatrix[i][j] == 1) output << "0 0 0 ";
 	 else if(outputMatrix[i][j] == 2) output << "1 0 0 ";
+	 else if(outputMatrix[i][j] == 3) output << "0 1 0 ";
 	 else output << "1 1 1 ";
       }
       output << "\n";
@@ -118,11 +164,11 @@ int generateImage(std::vector< std::vector<float> > data){
 }
 
 int main(){
-      const int input = 10;
+      const int input = 5;
       clock_t START = clock();
       std::vector< std::vector<float> > data = solve(input);
       double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
-      cout << T_ELAPSED << endl;
+      cout << "Time to generate data: " << T_ELAPSED << endl;
       /* Print Data Vectory
 	 for(int i=0; i<input; i++){
 	 for(int j=0; j<2; j++){
@@ -135,6 +181,6 @@ int main(){
       START = clock();
       generateImage(data);
       T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
-      cout << T_ELAPSED << endl;
+      cout << "Time to generate image: " << T_ELAPSED << endl;
 }
 
