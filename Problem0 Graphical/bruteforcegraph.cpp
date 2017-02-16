@@ -78,6 +78,31 @@ int generateImage(std::vector< std::vector<float> > data){
    outputMatrix[(int)(dimensions*data[index1][0])][(int)(dimensions*data[index1][1])] = 2;
    outputMatrix[(int)(dimensions*data[index2][0])][(int)(dimensions*data[index2][1])] = 2;
 
+   // Bresenham Algorithm
+
+   float x1 = (float)(dimensions)*(float)(data[index1][0]);
+   float y1 = (float)(dimensions)*(float)(data[index1][1]);
+   float x2 = (float)(dimensions)*(float)(data[index2][0]);
+   float y2 = (float)(dimensions)*(float)(data[index2][1]);
+
+   float dx = x2 - x1;
+   float dy = y2 - y1;
+
+   float m = dy/dx;
+   int j = (int)(y1);
+   float e = m - 1;
+
+   for(int i = (int)(x1); i < (int)(x2); i++){
+      // Illuminate point
+      outputMatrix[i][j] = 2;
+      if(e >= 0){
+	 j += 1;
+	 e -= 1.0;
+      }
+      e += m;
+   }
+   
+   
    // Write to the image
    for(int i=0; i<dimensions; i++){
       for(int j=0; j<dimensions; j++){
