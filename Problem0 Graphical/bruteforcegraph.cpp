@@ -119,7 +119,6 @@ int generateImage(std::vector< std::vector<float> > data){
 	    while(e>0){
 	       e -= 1.0;
 	       j += 1;
-	       outputMatrix[i][j] = 2;
 	    }
 	 }
 	 e += m;
@@ -135,25 +134,30 @@ int generateImage(std::vector< std::vector<float> > data){
       for(int i = (int)(x1); i <= (int)(x2); i++){
 	 // Illuminate point
 	 outputMatrix[i][j] = 2;
-	 if(e >= 0){
-	    while(e<0 or (i==(int)(x2) and j >= (int)(y2))){
+	 if(e <= 0){
+	    while(e<0){
 	       e += 1.0;
 	       j -= 1;
-	       outputMatrix[i][j] = 2;
 	    }
 	 }
-	 e -= m;
+	 e += m;
+	 cout << "e: " << e << endl;
       }
    }
 
+   // Highlight the ending points because sometimes we wanna see where
+   //    they are so that we can check if the line is drawn correctly
+
+   outputMatrix[(int)(x2)][(int)(y2)] = 3;
+   outputMatrix[(int)(x1)][(int)(y1)] = 3;
 
 
    // Write to the image
    for(int i=0; i<dimensions; i++){
       for(int j=0; j<dimensions; j++){
 	 if(outputMatrix[i][j] == 1) output << "0 0 0 ";
-	 else if(outputMatrix[i][j] == 2) output << "1 0 0 ";
 	 else if(outputMatrix[i][j] == 3) output << "0 1 0 ";
+	 else if(outputMatrix[i][j] == 2) output << "1 0 0 ";
 	 else output << "1 1 1 ";
       }
       output << "\n";
