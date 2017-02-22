@@ -141,7 +141,6 @@ int generateImage(std::vector< std::vector<float> > data){
 	    }
 	 }
 	 e += m;
-	 cout << "e: " << e << endl;
       }
    }
 
@@ -168,12 +167,12 @@ int generateImage(std::vector< std::vector<float> > data){
 }
 
 int main(){
-      const int input = 5;
+      const int input = 20;
       clock_t START = clock();
       std::vector< std::vector<float> > data = solve(input);
       double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
       cout << "Time to generate data: " << T_ELAPSED << endl;
-      /* Print Data Vectory
+      /* Print Data Vector
 	 for(int i=0; i<input; i++){
 	 for(int j=0; j<2; j++){
 	 cout << data[i][j]  << "  ";
