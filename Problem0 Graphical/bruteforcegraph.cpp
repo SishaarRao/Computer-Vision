@@ -64,7 +64,7 @@ std::vector< std::vector<float> > solve(int in) {
 
 int generateImage(std::vector< std::vector<float> > data){
    ofstream output;
-   const int dimensions = 200;
+   const int dimensions = 500;
    // Create File and Add Header
    output.open("output.ppm");
 
