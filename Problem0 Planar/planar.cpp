@@ -1,8 +1,9 @@
 /*
 *		Created by Sishaar Rao
 *		2/9/16
-*		This is the Planar solution for the minimum distance problem
-*		This will be utilizing the "Divide and Conquer approach"
+*		This is the side by side comparison of a Brute Force solution
+*               and a Planar solution for the min distance problem
+*		The Planar solution will be utilizing the "Divide and Conquer" approach
 */
 
 #include <iostream>
