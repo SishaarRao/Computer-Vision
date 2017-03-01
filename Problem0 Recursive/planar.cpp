@@ -110,10 +110,12 @@ float planar(std::vector< std::vector<float> > data, int start, int end){
    
    float myMin = minimum(dLmin, dRmin);
    //Find the minimal distance dLRmin among the set of pairs of points in which one point lies on the left of the dividing vertical and the other point lies to the right.
-   
+   //   cout << "Mid: " << mid << endl;
+   //   cout << "Min: " << myMin << endl;
    // Find upper and lower bound
-   int lower; int upper; 
+   int lower = start; int upper = end; 
    for(int i= mid; i >= start; i--){
+      // cout << "calc: " << data[mid][0] - data[i][0] << endl;
      if(data[mid][0] - data[i][0] > myMin){
        lower = i;
        break;
