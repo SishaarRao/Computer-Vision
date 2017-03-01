@@ -100,22 +100,17 @@ float planar(std::vector< std::vector<float> > data, int start, int end){
    //Solve the problem recursively in the left and right subsets. This yields the left-side and right-side minimum distances dLmin and dRmin, respectively
 
    //Case where subset is small enough to bruteforce
-   cout << start << " " << end << endl;
    if(end - start <= 3)
       return bruteforce(data, start, end);
 
    //Case where we need to split the dataset and recur
    float dLmin = planar(data, start, mid);
-   float dRmin = planar(data, mid, end);
-   
+   float dRmin = planar(data, mid, end);   
    float myMin = minimum(dLmin, dRmin);
-   //Find the minimal distance dLRmin among the set of pairs of points in which one point lies on the left of the dividing vertical and the other point lies to the right.
-   //   cout << "Mid: " << mid << endl;
-   //   cout << "Min: " << myMin << endl;
+
    // Find upper and lower bound
    int lower = start; int upper = end; 
    for(int i= mid; i >= start; i--){
-      // cout << "calc: " << data[mid][0] - data[i][0] << endl;
      if(data[mid][0] - data[i][0] > myMin){
        lower = i;
        break;
@@ -128,12 +123,9 @@ float planar(std::vector< std::vector<float> > data, int start, int end){
        break;
      }
    }
-   cout << "Lower: " << lower << endl;
-   cout << "Upper: " << upper << endl;
 
    // Loop through and find min
-   float dLRmin = bruteforce(data, upper, lower);
-
+   float dLRmin = bruteforce(data, lower, upper);
 
    //minimum among dLmin, dRmin, and dLRmin
    return smallest(dLmin, dRmin, dLRmin);
@@ -141,7 +133,13 @@ float planar(std::vector< std::vector<float> > data, int start, int end){
 
 int main(){
   std::vector< std::vector<float> > data = createData();
+  clock_t START = clock();
   cout << "Planar: " << planar(data, 0, data.size()) << endl;
+  double T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
+  cout << "Time: " << T_ELAPSED << endl << endl;
+  START = clock();
   cout << "Brute Force: " << bruteforce2(data) <<endl;
+  T_ELAPSED = (double)(clock() - START) / CLOCKS_PER_SEC;
+  cout << "Time: " << T_ELAPSED << endl << endl;
 }
 
